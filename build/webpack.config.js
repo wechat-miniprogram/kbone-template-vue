@@ -1,22 +1,38 @@
 const path = require('path')
+const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 
-const isOptimize = true // 是否压缩业务代码
+const isDevelop = process.env.NODE_ENV === 'development'
+const isOptimize = !isDevelop // 是否压缩业务代码
+
+const entry = {
+    // js 入口
+    home: path.resolve(__dirname, '../src/home/main.js'),
+    list: path.resolve(__dirname, '../src/list/main.js'),
+    detail: path.resolve(__dirname, '../src/detail/main.js'),
+}
+const plugins = Object.keys(entry).map(entryName => {
+    return new HtmlWebpackPlugin({
+        filename: `${entryName}.html`,
+        chunks: [entryName],
+        template: path.join(__dirname, '../src/index.html')
+    })
+})
+if (isDevelop) {
+    plugins.push(new webpack.HotModuleReplacementPlugin())
+}
 
 module.exports = {
-    mode: 'production',
-    entry: {
-        // js 入口
-        home: path.resolve(__dirname, '../src/home/main.js'),
-        detail: path.resolve(__dirname, '../src/detail/main.js'),
-    },
+    mode: process.env.NODE_ENV || 'production',
+    entry,
     output: {
         path: path.resolve(__dirname, '../dist/web'),
-        publicPath: './',
+        publicPath: '/',
         filename: '[name].js'
     },
     target: 'web',
@@ -91,7 +107,7 @@ module.exports = {
                             ident: 'postcss',
                             plugins: () => {
                                 return [
-                                    require('autoprefixer'),
+                                    autoprefixer,
                                 ]
                             }
                         }
@@ -138,8 +154,8 @@ module.exports = {
                     options: {
                         limit: 1024,
                         name: '[name]_[hash:hex:6].[ext]',
-                        publicPath: 'https://test.miniprogram.com/res', // 对于资源文件直接使用线上的 cdn 地址
-                        emitFile: false,
+                        publicPath: 'https://test.miniprogram.com/res',
+                        emitFile: true,
                     }
                 }],
             },
@@ -153,10 +169,6 @@ module.exports = {
             filename: '[name].wxss',
         }),
         new VueLoaderPlugin(),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            chunks: ['index'],
-            template: path.join(__dirname, '../src/index.html')
-        }),
+        ...plugins,
     ],
 }

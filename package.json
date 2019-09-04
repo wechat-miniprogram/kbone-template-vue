@@ -3,12 +3,13 @@
     "description": "a simple vue template for kbone",
     "author": "wechat-miniprogram",
     "scripts": {
-        "start": "npm run mp",
-        "mp": "",
-        "build-mp": "cross-env NODE_ENV=production webpack --config build/webpack.mp.config.js --progress --hide-modules",
-        "web": "",
-        "build-web": "rimraf dist/web && cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress --hide-modules",
-        "build": "npm run build-mp && npm run build-web"
+        "start": "npm run dev",
+        "dev": "npm run mp && npm run web",
+        "mp": "cross-env NODE_ENV=development webpack --config build/webpack.mp.config.js --progress --hide-modules",
+        "web": "cross-env NODE_ENV=development node --max_old_space_size=8192 --inspect=127.0.0.1:9230 ./build/dev-server.js",
+        "build": "npm run build:mp && npm run build:web",
+        "build:mp": "cross-env NODE_ENV=production webpack --config build/webpack.mp.config.js --progress --hide-modules",
+        "build:web": "rimraf dist/web && cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress --hide-modules"
     },
     "dependencies": {
         "vue": "^2.5.11"
@@ -26,24 +27,28 @@
         "babel-preset-stage-3": "^6.24.1",
         "cross-env": "^5.0.5",
         "css-loader": "^0.28.7",
-        "less": "^3.7.1",
-        "thread-loader": "^1.2.0",
-        "less-loader": "^4.1.0",
-        "postcss-loader": "^3.0.0",
-        "raw-loader": "^0.5.1",
-        "url-loader": "^1.1.1",
         "extract-text-webpack-plugin": "^3.0.2",
         "file-loader": "^1.1.4",
         "html-webpack-plugin": "^4.0.0-beta.5",
+        "koa": "^2.8.1",
+        "koa-router": "^7.4.0",
+        "koa-static": "^5.0.0",
+        "less": "^3.7.1",
+        "less-loader": "^4.1.0",
         "mini-css-extract-plugin": "^0.5.0",
+        "mp-webpack-plugin": "latest",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
+        "postcss": "^7.0.14",
+        "postcss-loader": "^3.0.0",
+        "raw-loader": "^0.5.1",
+        "reduce-loader": "latest",
         "stylehacks": "^4.0.3",
+        "thread-loader": "^1.2.0",
+        "url-loader": "^1.1.1",
+        "vue-improve-loader": "latest",
         "vue-loader": "^15.7.0",
         "vue-template-compiler": "^2.6.10",
         "webpack": "^4.29.6",
-        "webpack-cli": "^3.2.3",
-        "mp-webpack-plugin": "latest",
-        "vue-improve-loader": "latest",
-        "reduce-loader": "latest"
+        "webpack-cli": "^3.2.3"
     }
 }

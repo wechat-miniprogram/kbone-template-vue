@@ -1,4 +1,4 @@
-const mpPluginConfig = {
+module.exports = {
     // 页面 origin，默认是 https://miniprogram.default
     origin: 'https://test.miniprogram.com',
     // 入口页面路由，默认是 /
@@ -29,18 +29,18 @@ const mpPluginConfig = {
         // app.wxss 输出配置，默认值为 default，即输出默认标签样式，其他可选值：none - 输出为空，display - 只输出 display 相关的内容
         appWxss: 'default',
         // 小程序分包，详细注意事项可参考：https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/basic.html
-        subpackages: {
-            package1: ['list'], // 包名为 package1，包中包含页面 list，下同
-            package2: ['detail'],
-        },
+        // subpackages: {
+        //     package1: ['list'], // 包名为 package1，包中包含页面 list，下同
+        //     package2: ['detail'],
+        // },
         // 小程序分包预下载，详细注意事项可参考：https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/preload.html
-        preloadRule: {
-            // 进入 list 页面时，会预下载名为 package2 的分包
-            list: {
-                network: 'all',
-                packages: ['package2'],
-            },
-        },
+        // preloadRule: {
+        //     // 进入 list 页面时，会预下载名为 package2 的分包
+        //     list: {
+        //         network: 'all',
+        //         packages: ['package2'],
+        //     },
+        // },
     },
     // 运行时配置
     runtime: {
@@ -91,7 +91,8 @@ const mpPluginConfig = {
     },
     // 项目配置，会被合并到 project.config.json
     projectConfig: {
-        appid: 'wx1234567890',
+        projectname: 'kbone-template-vue',
+        appid: '',
     },
     // 包配置，会被合并到 package.json
     packageConfig: {

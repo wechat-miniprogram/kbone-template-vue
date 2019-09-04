@@ -1,7 +1,8 @@
 <template>
   <div class="cnt">
     <Header></Header>
-    <button @click="onClickBack">回到上一页</button>
+    <a href="/home">回到首页</a>
+    <button @click="onClickJump">回到首页</button>
     <Footer></Footer>
   </div>
 </template>
@@ -17,17 +18,15 @@ export default {
     Footer
   },
   created() {
-    window.addEventListener('wxload', query => console.log('page3 wxload', query))
-    window.addEventListener('wxshow', () => console.log('page3 wxshow'))
-    window.addEventListener('wxready', () => console.log('page3 wxready'))
-    window.addEventListener('wxhide', () => console.log('page3 wxhide'))
-    window.addEventListener('wxunload', () => console.log('page3 wxunload'))
+    window.addEventListener('wxload', query => console.log('page2 wxload', query))
+    window.addEventListener('wxshow', () => console.log('page2 wxshow'))
+    window.addEventListener('wxready', () => console.log('page2 wxready'))
+    window.addEventListener('wxhide', () => console.log('page2 wxhide'))
+    window.addEventListener('wxunload', () => console.log('page2 wxunload'))
   },
   methods: {
-    onClickBack() {
-      if (process.env.isMiniprogram) {
-        wx.navigateBack()
-      }
+    onClickJump() {
+      window.location.href = '/home'
     },
   },
 }
