@@ -1,6 +1,12 @@
-# kbone-template-vue
+# vue-kbone
 
-a simple vue template for kbone
+使用 react 多端开发(小程序和Web)，基于 [kbone](https://github.com/wechat-miniprogram/kbone) 的 element 和 render。
+
+## 特性
+
+* 一键接入，立即使用
+* 支持更完整的 vue 语法及特性
+* webpack、es2018+、babel7+、jsx、hot reload、cli、vue-router、vuex，你想要的都有
 
 ## 开发
 

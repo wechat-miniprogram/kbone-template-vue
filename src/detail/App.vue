@@ -7,10 +7,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Header from '../common/Header.vue'
 import Footer from '../common/Footer.vue'
 
-export default {
+export default Vue.extend({
   name: 'App',
   components: {
     Header,
@@ -30,7 +31,7 @@ export default {
       }
     },
   },
-}
+})
 </script>
 
 <style lang="less">
