@@ -1,8 +1,5 @@
-const utils = require('./utils')
 const webpack = require('webpack')
-const config = require('../config')
 const merge = require('webpack-merge')
-const path = require('path')
 const baseWebpackConfig = require('./webpack.base.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
@@ -22,13 +19,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     compress: true,
     host: process.env.HOST || 'localhost',
     port: +process.env.PORT || 8080,
-    open: config.dev.autoOpenBrowser,
-    overlay: config.dev.errorOverlay ? {warnings: false, errors: true} : false,
-    publicPath: config.dev.assetsPublicPath,
-    proxy: config.dev.proxyTable,
-    quiet: true, // necessary for FriendlyErrorsPlugin
+    open: true, // 自动打开浏览器
+    overlay: {warnings: false, errors: true}, // 展示全屏报错
+    publicPath: '/',
+    proxy: {},
+    quiet: true, // for FriendlyErrorsPlugin
     watchOptions: {
-      poll: config.dev.poll,
+      poll: false,
     }
   },
   module: {
@@ -53,13 +50,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   devtool: 'cheap-module-eval-source-map',
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': require('../config/dev.env')
+      'process.env': {
+        NODE_ENV: '"development"',
+      },
     }),
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+    new webpack.NamedModulesPlugin(), // 开启 HMR 的时候使用该插件会显示模块的相对路径
     new webpack.NoEmitOnErrorsPlugin(),
-    // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
@@ -74,15 +72,12 @@ module.exports = new Promise((resolve, reject) => {
     if (err) {
       reject(err)
     } else {
-      // add port to devServer config
       devWebpackConfig.devServer.port = port
-
-      // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
         },
-        onErrors: config.dev.notifyOnErrors ? utils.createNotifierCallback() : undefined,
+        onErrors: undefined,
       }))
 
       resolve(devWebpackConfig)

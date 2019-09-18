@@ -1,7 +1,5 @@
 const path = require('path')
-const utils = require('./utils')
 const webpack = require('webpack')
-const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -15,11 +13,11 @@ const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, '../dist/web'),
-    filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    filename: path.posix.join('static', 'js/[name].[chunkhash].js'),
+    chunkFilename: path.posix.join('static', 'js/[id].[chunkhash].js')
   },
   optimization: {
-    splitChunks: {
+    splitChunks: { // 代码分割配置
       chunks: 'async',
       minSize: 30000,
       maxSize: 0,
@@ -84,14 +82,15 @@ const webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
-      'process.env': 'production'
+      'process.env': {
+        NODE_ENV: '"production"',
+      },
     }),
     new VueLoaderPlugin(),
     // 分离 css 文件
     new MiniCssExtractPlugin({
-      filename: utils.assetsPath('css/[name].[hash].css'),
+      filename: path.posix.join('static', 'css/[name].[hash].css'),
     }),
-    // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../dist/web/index.html'),
       template: 'index.html',
@@ -104,16 +103,9 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       chunksSortMode: 'dependency'
     }),
-    // keep module.id stable when vendor modules does not change
+    // 当 vendor 模块没有改变时，保证模块 id 不变
     new webpack.HashedModuleIdsPlugin(),
-    // enable scope hoisting
-    new webpack.optimize.ModuleConcatenationPlugin(),
-  ]
+  ],
 })
-
-if (config.build.bundleAnalyzerReport) {
-  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-  webpackConfig.plugins.push(new BundleAnalyzerPlugin())
-}
 
 module.exports = webpackConfig
