@@ -19,17 +19,11 @@ module.exports = {
   settings: {
     'import/resolver': {
       webpack: {
-        config: 'build/webpack.base.conf.js'
+        config: 'build/webpack.base.config.js'
       }
     }
   },
-  // add your custom rules here
   rules: {
-    // don't require .vue extension when importing
-    // 'import/extensions': ['error', 'always', {
-    //   js: 'never',
-    //   vue: 'never'
-    // }],
     // disallow reassignment of function parameters
     // disallow parameter object manipulation except for specific exclusions
     'no-param-reassign': ['error', {
@@ -57,6 +51,8 @@ module.exports = {
       'error',
       'only-multiline'
     ],
+    'import/no-webpack-loader-syntax': 'off',
+    'import/first': 'off',
   },
   'globals': {
     'window': true,

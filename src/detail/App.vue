@@ -38,6 +38,7 @@ export default Vue.extend({
 .cnt {
   margin-top: 20px;
 }
+
 a, button {
   display: block;
   width: 100%;
