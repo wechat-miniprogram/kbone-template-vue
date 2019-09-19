@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/home/App.vue'
-import List from '@/list/App.vue'
-import Detail from '@/detail/App.vue'
+
+const Home = () => import(/* webpackChunkName: "Home" */'@/home/Index.vue')
+const List = () => import(/* webpackChunkName: "List" */'@/list/Index.vue')
+const Detail = () => import(/* webpackChunkName: "Detail" */'@/detail/Index.vue')
 
 Vue.use(Router)
 
@@ -13,8 +14,12 @@ export default new Router({
     name: 'Home',
     component: Home,
   }, {
+    path: '/index.html',
+    name: 'HomeHtml',
+    component: Home,
+  }, {
     path: '/test/(home|index)',
-    name: 'Home',
+    name: 'HomeTest',
     component: Home,
   }, {
     path: '/test/list/:id',

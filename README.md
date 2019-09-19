@@ -38,6 +38,8 @@ npm run build:mp
 
 ## 目录说明
 
+此模板 Web 端使用单入口，通过 vue-router + 动态 import 的方式来运行；小程序端则按照业务分拆成多个页面，同属一个业务的页面则通过 vue-router 来组织。
+
 ```
 ├─ build
 │  ├─ miniprogram.config.js  // mp-webpack-plugin 配置
@@ -50,12 +52,16 @@ npm run build:mp
 │  └─ web                    // web 端编译出的文件，用于生产环境
 ├─ src
 │  ├─ common                 // 通用组件
+│  ├─ mp                     // 小程序端入口目录
+│  │  ├─ home                // 小程序端 home 页面
+│  │  │  └─ main.mp.js       // 小程序端入口文件
+│  │  └─ other               // 小程序端 other 页面
+│  │     └─ main.mp.js       // 小程序端入口文件
 │  ├─ detail                 // detail 页面
-│  │  ├─ App.vue             // detail 页面主视图
-│  │  └─ main.mp.js          // detail 页面小程序端入口
 │  ├─ home                   // home 页面
 │  ├─ list                   // list 页面
 │  ├─ router                 // vue-router 路由定义
+│  ├─ store                  // vuex 相关目录
 │  ├─ App.vue                // Web 端入口主视图
 │  └─ main.js                // Web 端入口文件
 └─ index.html                // Web 端入口模板

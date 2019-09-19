@@ -12,12 +12,11 @@ module.exports = {
         // 路由可以是多个值，支持动态路由
         home: [
             '/(home|index)?',
+            '/index.html',
             '/test/(home|index)',
         ],
-        list: [
+        other: [
             '/test/list/:id',
-        ],
-        detail: [
             '/test/detail/:id',
         ],
     },
