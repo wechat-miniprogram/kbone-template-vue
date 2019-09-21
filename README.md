@@ -69,7 +69,7 @@ npm run build:mp
 
 ## 小程序端打开
 
-需要先进入 dist/mp 目录执行 `npm install` 安装相关的依赖包，然后用开发者工具打开 dist/mp 目录后再进行 npm 构建（关于 npm 构建可[点此参考相关文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)）。
+需要先进入 dist/mp 目录执行 `npm install` 安装相关的依赖包，然后用开发者工具打开 dist/mp 目录后再进行 npm 构建（关于 npm 构建可[点此查看官方文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)）。
 
 ## License
 
