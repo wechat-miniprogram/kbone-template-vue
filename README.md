@@ -36,6 +36,10 @@ npm run build
 npm run build:mp
 ```
 
+## 小程序端打开
+
+需要先进入 dist/mp 目录执行 `npm install` 安装相关的依赖包，然后用开发者工具打开 dist/mp 目录后再进行 npm 构建（关于 npm 构建可[点此查看官方文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)）。
+
 ## 目录说明
 
 此模板 Web 端使用单入口，通过 vue-router + 动态 import 的方式来运行；小程序端则按照业务分拆成多个页面，同属一个业务的页面则通过 vue-router 来组织。
@@ -66,10 +70,6 @@ npm run build:mp
 │  └─ main.js                // Web 端入口文件
 └─ index.html                // Web 端入口模板
 ```
-
-## 小程序端打开
-
-需要先进入 dist/mp 目录执行 `npm install` 安装相关的依赖包，然后用开发者工具打开 dist/mp 目录后再进行 npm 构建（关于 npm 构建可[点此查看官方文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)）。
 
 ## License
 
