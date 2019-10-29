@@ -71,6 +71,10 @@ npm run build:mp
 └─ index.html                // Web 端入口模板
 ```
 
+## 其他说明
+
+如果要使用 ts，则在 vue 的 script 标签上加上 `lang="ts"`，具体可参考 src/list/Index.vue。如果要使用 reduce-loader，就不能使用 ts，因为 ts 目前没有支持内联 loader。
+
 ## License
 
 MIT 

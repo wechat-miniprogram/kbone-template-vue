@@ -59,6 +59,8 @@
     "rimraf": "^2.7.1",
     "terser-webpack-plugin": "^2.1.0",
     "thread-loader": "^2.1.3",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.6.4",
     "url-loader": "^0.5.8",
     "vue-improve-loader": "^0.1.1",
     "vue-loader": "^15.7.1",

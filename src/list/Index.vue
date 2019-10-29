@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue'
 import Header from '../common/Header.vue'
 import Footer from '../common/Footer.vue'
@@ -19,7 +19,7 @@ export default Vue.extend({
     Footer
   },
   created() {
-    window.addEventListener('wxload', query => console.log('page2 wxload', query))
+    window.addEventListener('wxload', (query: any) => console.log('page2 wxload', query))
     window.addEventListener('wxshow', () => console.log('page2 wxshow'))
     window.addEventListener('wxready', () => console.log('page2 wxready'))
     window.addEventListener('wxhide', () => console.log('page2 wxhide'))

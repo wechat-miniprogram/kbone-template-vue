@@ -38,6 +38,25 @@ module.exports = {
           },
         }],
       },
+      // ts
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'thread-loader',
+        }, {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
+        }, {
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+            happyPackMode: true,
+          },
+        }],
+      },
       // js
       {
         test: /\.js$/,

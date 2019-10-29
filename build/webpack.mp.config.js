@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const eslintFriendlyFormatter = require('eslint-friendly-formatter')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const {VueLoaderPlugin} = require('vue-loader')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -111,6 +112,17 @@ module.exports = {
           }
         ],
       },
+      // eslint
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [path.resolve(__dirname, '../src')],
+        options: {
+          formatter: eslintFriendlyFormatter,
+          emitWarning: true,
+        },
+      },
       // vue
       {
         test: /\.vue$/,
@@ -126,6 +138,25 @@ module.exports = {
           },
           'vue-improve-loader',
         ]
+      },
+      // ts
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'thread-loader',
+        }, {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
+        }, {
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+            happyPackMode: true,
+          },
+        }],
       },
       // js
       {
