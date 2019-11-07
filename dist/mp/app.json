@@ -1,0 +1,13 @@
+{
+	"pages": [
+		"pages/home/index",
+		"pages/other/index"
+	],
+	"window": {
+		"backgroundTextStyle": "dark",
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "kbone"
+	},
+	"subpackages": [],
+	"preloadRule": {}
+}
