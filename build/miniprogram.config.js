@@ -33,6 +33,10 @@ module.exports = {
         navigationBarTextStyle: 'white',
         navigationBarTitleText: 'kbone',
     },
+    // app.json 补充配置
+	appExtraConfig: {
+		sitemapLocation: 'sitemap.json',
+	},
     // 全局配置
     global: {
         share: true, // 是否支持分享，若支持，会展示分享按钮并调用 app 的 onShareAppMessage 按钮

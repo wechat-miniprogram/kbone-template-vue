@@ -8,7 +8,7 @@ const {
 
 const ELEMENT_DIFF_KEYS = ['nodeId', 'pageId', 'tagName', 'compName', 'id', 'class', 'style', 'src', 'mode', 'lazyLoad', 'showMenuByLongpress', 'isImage', 'isLeaf', 'isSimple', 'content']
 const TEXT_NODE_DIFF_KEYS = ['nodeId', 'pageId', 'content']
-const NEET_SPLIT_CLASS_STYLE_FROM_CUSTOM_ELEMENT = ['INPUT', 'TEXTAREA', 'VIDEO', 'CANVAS', 'WX-COMPONENT'] // 需要分离 class 和 style 的节点
+const NEET_SPLIT_CLASS_STYLE_FROM_CUSTOM_ELEMENT = ['INPUT', 'TEXTAREA', 'VIDEO', 'CANVAS', 'WX-COMPONENT', 'WX-CUSTOM-COMPONENT'] // 需要分离 class 和 style 的节点
 const NEET_RENDER_TO_CUSTOM_ELEMENT = ['IFRAME', ...NEET_SPLIT_CLASS_STYLE_FROM_CUSTOM_ELEMENT] // 必须渲染成自定义组件的节点
 const NOT_SUPPORT = ['IFRAME']
 
@@ -33,7 +33,7 @@ function filterNodes(domNode, level) {
         // 特殊节点不需要处理 id 和样式
         if (NEET_SPLIT_CLASS_STYLE_FROM_CUSTOM_ELEMENT.indexOf(child.tagName) >= 0) {
             domInfo.id = ''
-            domInfo.class = `h5-${domInfo.tagName}`
+            domInfo.class = `h5-${domInfo.tagName} ${domInfo.tagName === 'wx-component' ? 'wx-' + child.behavior : ''}`
             domInfo.style = ''
         }
 
@@ -113,13 +113,15 @@ function checkComponentAttr(name, domNode, destData, oldData) {
         }
     }
 
-    // 补充 id、class 和 style
+    // 补充 id、class、style 和 hidden
     const newId = domNode.id
     if (!oldData || oldData.id !== newId) destData.id = newId
     const newClass = `wx-comp-${name} node-${domNode.$$nodeId} ${domNode.className || ''}`
     if (!oldData || oldData.class !== newClass) destData.class = newClass
     const newStyle = domNode.style.cssText
     if (!oldData || oldData.style !== newStyle) destData.style = newStyle
+    const newHidden = domNode.getAttribute('hidden') || false
+    if (!oldData || oldData.hidden !== newHidden) destData.hidden = newHidden
 }
 
 /**
@@ -163,6 +165,28 @@ function checkEventAccessDomNode(evt, domNode, dest) {
     return false
 }
 
+/**
+ * 查找最近的符合条件的祖先节点
+ */
+function findParentNode(domNode, tagName) {
+    const checkParentNode = (parentNode, tagName) => {
+        if (!parentNode) return false
+        if (parentNode.tagName === tagName) return true
+        if (parentNode.tagName === 'WX-COMPONENT' && parentNode.behavior === tagName.toLowerCase()) return true
+
+        return false
+    }
+    let parentNode = domNode.parentNode
+
+    if (checkParentNode(parentNode, tagName)) return parentNode
+    while (parentNode && parentNode.tagName !== tagName) {
+        parentNode = parentNode.parentNode
+        if (checkParentNode(parentNode, tagName)) return parentNode
+    }
+
+    return null
+}
+
 module.exports = {
     NOT_SUPPORT,
     filterNodes,
@@ -170,4 +194,5 @@ module.exports = {
     checkComponentAttr,
     dealWithLeafAndSimple,
     checkEventAccessDomNode,
+    findParentNode,
 }

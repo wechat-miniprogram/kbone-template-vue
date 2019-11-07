@@ -9,5 +9,6 @@
 		"navigationBarTitleText": "kbone"
 	},
 	"subpackages": [],
-	"preloadRule": {}
+	"preloadRule": {},
+	"sitemapLocation": "sitemap.json"
 }
