@@ -52,6 +52,7 @@ Component({
 
         // 记录 dom
         this.domNode = cache.getNode(pageId, nodeId)
+        if (!this.domNode) return
 
         // TODO，为了兼容基础库的一个 bug，暂且如此实现
         if (this.domNode.tagName === 'CANVAS') this.domNode._wxComponent = this
@@ -102,7 +103,8 @@ Component({
 
             // 儿子节点有变化
             const childNodes = _.filterNodes(this.domNode, DOM_SUB_TREE_LEVEL - 1)
-            if (_.checkDiffChildNodes(childNodes, this.data.childNodes)) {
+            const oldChildNodes = this.data.wxCompName || this.data.wxCustomCompName ? this.data.innerChildNodes : this.data.childNodes
+            if (_.checkDiffChildNodes(childNodes, oldChildNodes)) {
                 const dataChildNodes = _.dealWithLeafAndSimple(childNodes, this.onChildNodesUpdate)
                 const newData = {}
                 if (this.data.wxCompName || this.data.wxCustomCompName) {
