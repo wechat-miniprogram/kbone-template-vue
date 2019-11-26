@@ -53,6 +53,7 @@ module.exports = {
     ],
     'import/no-webpack-loader-syntax': 'off',
     'import/first': 'off',
+    'linebreak-style': ['off', 'windows'],
   },
   'globals': {
     'window': true,

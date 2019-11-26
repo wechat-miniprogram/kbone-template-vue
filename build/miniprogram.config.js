@@ -35,7 +35,10 @@ module.exports = {
     },
     // app.json 补充配置
 	appExtraConfig: {
-		sitemapLocation: 'sitemap.json',
+        sitemapLocation: 'sitemap.json',
+        useExtendedLib: {
+            kbone: true,
+        },
 	},
     // 全局配置
     global: {
