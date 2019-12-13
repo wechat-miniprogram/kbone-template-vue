@@ -1,5 +1,5 @@
 /**
- * 配置参考：https://github.com/wechat-miniprogram/kbone/blob/develop/docs/miniprogram.config.js
+ * 配置参考：https://wechat-miniprogram.github.io/kbone/docs/config/
  */
 
 module.exports = {
@@ -26,6 +26,10 @@ module.exports = {
         notFound: 'home',
         // 跳转到 origin 之外的页面时处理方式，值同 notFound
         accessDenied: 'home',
+    },
+    // 构建输出配置
+    generate: {
+        autoBuildNpm: 'npm',
     },
     // app 配置，同 https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html#window
     app: {
