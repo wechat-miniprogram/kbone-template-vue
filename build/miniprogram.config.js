@@ -3,13 +3,9 @@
  */
 
 module.exports = {
-    // 页面 origin，默认是 https://miniprogram.default
     origin: 'https://test.miniprogram.com',
-    // 入口页面路由，默认是 /
     entry: '/',
-    // 页面路由，用于页面间跳转
     router: {
-        // 路由可以是多个值，支持动态路由
         home: [
             '/(home|index)?',
             '/index.html',
@@ -20,39 +16,41 @@ module.exports = {
             '/test/detail/:id',
         ],
     },
-    // 特殊路由跳转
     redirect: {
-        // 跳转遇到同一个 origin 但是不在 router 里的页面时处理方式，支持的值：webview - 使用 web-view 组件打开；error - 抛出异常；none - 默认值；什么都不做，router 配置项中的 key
         notFound: 'home',
-        // 跳转到 origin 之外的页面时处理方式，值同 notFound
         accessDenied: 'home',
     },
-    // 构建输出配置
     generate: {
         autoBuildNpm: 'npm',
     },
-    // app 配置，同 https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html#window
     app: {
         backgroundTextStyle: 'dark',
         navigationBarTextStyle: 'white',
         navigationBarTitleText: 'kbone',
     },
-    // app.json 补充配置
 	appExtraConfig: {
         sitemapLocation: 'sitemap.json',
         useExtendedLib: {
             kbone: true,
         },
 	},
-    // 全局配置
     global: {
-        share: true, // 是否支持分享，若支持，会展示分享按钮并调用 app 的 onShareAppMessage 按钮
-        windowScroll: false, // 是否需要 window scroll 事件，会影响性能
-        backgroundColor: '#F7F7F7', // page 的背景色
+        share: true,
+        windowScroll: false,
+        backgroundColor: '#F7F7F7',
     },
-    // 页面配置，可以为单个页面做个性化处理，覆盖全局配置
     pages: {},
-    // 项目配置，会被合并到 project.config.json
+    optimization: {
+		domSubTreeLevel: 10,
+
+		elementMultiplexing: true,
+		textMultiplexing: true,
+		commentMultiplexing: true,
+		domExtendMultiplexing: true,
+
+		styleValueReduce: 5000,
+		attrValueReduce: 5000,
+	},
     projectConfig: {
         projectname: 'kbone-template-vue',
         appid: '',
