@@ -173,7 +173,7 @@ module.exports = {
       },
       // res
       {
-        test: /\.(png|jpg|gif|svg|eot|woff|woff2|ttf)$/,
+        test: /\.(png|jpg|jpeg|gif|svg|eot|woff|woff2|ttf)$/,
         use: [{
           loader: 'url-loader',
           options: {
