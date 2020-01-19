@@ -34,7 +34,7 @@ import Web from 'reduce-loader!../common/Web.vue'
 import 'reduce-loader!./web'
 
 export default Vue.extend({
-  name: 'App',
+  name: 'Home',
   components: {
     Header,
     Footer,

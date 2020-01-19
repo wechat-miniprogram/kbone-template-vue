@@ -12,7 +12,7 @@ import Header from '../common/Header.vue'
 import Footer from '../common/Footer.vue'
 
 export default Vue.extend({
-  name: 'App',
+  name: 'Detail',
   components: {
     Header,
     Footer
