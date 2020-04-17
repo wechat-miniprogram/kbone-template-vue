@@ -6,7 +6,6 @@
     "noImplicitAny": false,
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "app",
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
@@ -16,9 +15,8 @@
     "paths": {
       "*": [
         "node_modules/*",
-        "src/@types/*"
+        "src/**/@types/*"
       ],
-      "@src/client/*":["src/client/*"]
     }
   },
   "include": [
