@@ -16,8 +16,7 @@
     "paths": {
       "*": [
         "node_modules/*",
-        "src/@types/*",
-        "protobuf/@types/*"
+        "src/@types/*"
       ],
       "@src/client/*":["src/client/*"]
     }
