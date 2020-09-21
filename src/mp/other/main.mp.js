@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { sync } from 'vuex-router-sync'
 import App from '../../App.vue'
 import store from '../../store'
 import List from '../../list/Index.vue'
@@ -27,8 +26,6 @@ export default function createApp() {
   document.body.appendChild(container)
 
   Vue.config.productionTip = false
-
-  sync(store, router)
 
   return new Vue({
     el: '#app',
